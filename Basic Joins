@@ -1,0 +1,43 @@
+1378. Replace Employee ID With The Unique Identifier
+
+SELECT euni.unique_id, e.name
+FROM Employees AS e
+LEFT JOIN  EmployeeUNI AS euni
+ON e.id = euni.id
+
+
+##########################################################
+1068. Product Sales Analysis I
+
+SELECT p.product_name, s.year, s.price
+FROM Sales AS s
+LEFT JOIN Product AS p
+ON s.product_id = p.product_id
+
+##########################################################
+1581. Customer Who Visited but Did Not Make Any Transactions
+
+SELECT v.customer_id, COUNT(v.customer_id) AS count_no_trans 
+FROM Visits as v
+LEFT JOIN Transactions as t
+ON v.visit_id = t.visit_id
+WHERE t.visit_id IS NULL 
+GROUP BY v.customer_id
+
+##########################################################
+197. Rising Temperature
+
+SELECT w1.id
+FROM Weather w1
+INNER JOIN Weather w2 ON w1.recordDate = DATE_ADD(w2.recordDate, INTERVAL 1 DAY)
+WHERE w1.temperature > w2.temperature
+
+##########################################################
+1661. Average Time of Process per Machine
+
+SELECT a1.machine_id, ROUND(AVG(a2.timestamp - a1.timestamp),3)  AS processing_time
+FROM Activity AS a1
+INNER JOIN Activity AS a2
+ON a1.machine_id = a2.machine_id AND a1.process_id = a2.process_id 
+WHERE a1.activity_type = 'start' and a2.activity_type = 'end'
+GROUP BY a1.machine_id

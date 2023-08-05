@@ -41,3 +41,15 @@ INNER JOIN Activity AS a2
 ON a1.machine_id = a2.machine_id AND a1.process_id = a2.process_id 
 WHERE a1.activity_type = 'start' and a2.activity_type = 'end'
 GROUP BY a1.machine_id
+
+##########################################################
+577. Employee Bonus
+
+SELECT e.name, b.bonus
+FROM Employee AS e
+LEFT JOIN Bonus AS b
+ON e.empId = b.empID
+WHERE b.bonus IS NULL or b.bonus < 1000
+
+##########################################################
+1280. Students and Examinations

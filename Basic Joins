@@ -61,3 +61,26 @@ LEFT JOIN Examinations AS e
 ON s.student_id = e.student_id and su.subject_name = e.subject_name
 GROUP BY s.student_name, su.subject_name
 ORDER BY s.student_id, su.subject_name
+
+##########################################################
+570. Managers with at Least 5 Direct Reports
+
+SELECT e1.name
+FROM Employee as e1
+INNER JOIN Employee as e2
+ON e1.id = e2.managerId
+GROUP BY e1.id
+HAVING COUNT(*) > 4
+
+##########################################################
+1934. Confirmation Rate
+
+SELECT s.user_id, 
+ROUND(SUM(CASE c.action
+  WHEN 'confirmed' THEN 1
+  ELSE 0
+END)/ Count(*),2) as confirmation_rate
+FROM Signups AS s
+LEFT JOIN Confirmations AS c
+ON s.user_id = c.user_id
+GROUP BY s.user_id

@@ -51,3 +51,12 @@ SELECT DATE_FORMAT(trans_date, '%Y-%m') as month, country,
 FROM Transactions
 GROUP BY DATE_FORMAT(trans_date, '%Y-%m'), country
 
+#################################################################
+1174. Immediate Food Delivery II
+
+SELECT ROUND(AVG(immediate)*100,2) as immediate_percentage
+FROM
+(SELECT MIN(order_date) = MIN(customer_pref_delivery_date) as immediate
+FROM Delivery
+GROUP BY customer_id) as t
+

@@ -8,3 +8,18 @@ GROUP BY e1.reports_to
 ORDER BY e2.employee_id
 
 ################################################################
+610. Triangle Judgement
+
+SELECT *, CASE WHEN x < y + z and y < x + z and z < y + x  THEN 'Yes' ELSE 'No' END as triangle
+FROM Triangle 
+
+################################################################
+180. Consecutive Numbers
+
+SELECT DISTINCT l1.num as ConsecutiveNums
+FROM Logs as l1
+INNER JOIN Logs as l2
+ON l1.num = l2.num
+INNER JOIN Logs as l3
+on l2.num = l3.num
+WHERE l1.id +1 = l2.id and l2.id +1 = l3.id

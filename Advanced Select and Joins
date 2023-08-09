@@ -8,6 +8,15 @@ GROUP BY e1.reports_to
 ORDER BY e2.employee_id
 
 ################################################################
+1789. Primary Department for Each Employee
+
+SELECT employee_id, department_id
+FROM Employee
+WHERE primary_flag = 'Y' OR (employee_id,1) IN
+  (SELECT employee_id, COUNT(department_id)
+  FROM Employee
+  GROUP BY employee_id)
+################################################################
 610. Triangle Judgement
 
 SELECT *, CASE WHEN x < y + z and y < x + z and z < y + x  THEN 'Yes' ELSE 'No' END as triangle

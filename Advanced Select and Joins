@@ -32,3 +32,15 @@ ON l1.num = l2.num
 INNER JOIN Logs as l3
 on l2.num = l3.num
 WHERE l1.id +1 = l2.id and l2.id +1 = l3.id
+
+################################################################ ACCUMULATED ACTION !!!!
+1204. Last Person to Fit in the Bus
+
+SELECT q1.person_name
+FROM Queue as q1 
+INNER JOIN Queue as q2 
+ON q1.turn >= q2.turn
+GROUP BY q1.turn
+HAVING SUM(q2.weight) <= 1000
+ORDER BY SUM(q2.weight) DESC
+LIMIT 1

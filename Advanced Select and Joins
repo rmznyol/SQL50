@@ -33,6 +33,26 @@ INNER JOIN Logs as l3
 on l2.num = l3.num
 WHERE l1.id +1 = l2.id and l2.id +1 = l3.id
 
+################################################################
+1164. Product Price at a Given Date
+
+WITH set_prices AS (
+    SELECT p.product_id, new_price as price
+    FROM Products as p
+    INNER JOIN
+    (SELECT product_id, MAX(change_date) as change_date
+    FROM Products
+    WHERE change_date <= '2019-08-16'
+    GROUP BY product_id) as t
+    ON p.product_id = t.product_id AND p.change_date = t.change_date
+)
+
+SELECT p.product_id, CASE WHEN s.price is NULL THEN 10 ELSE s.price END as price
+FROM Products as p
+LEFT JOIN set_prices as s
+ON p.product_id = s.product_id
+GROUP BY p.product_id
+
 ################################################################ ACCUMULATED ACTION !!!!
 1204. Last Person to Fit in the Bus
 

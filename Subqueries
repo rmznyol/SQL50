@@ -9,3 +9,13 @@ WHERE salary < 30000 and manager_id NOT IN (
 ORDER BY employee_id
 
 ######################################################################
+626. Exchange Seats
+
+SELECT (CASE 
+    WHEN id = (SELECT CASE WHEN MAX(id) % 2 = 1 THEN MAX(id) ELSE null END FROM Seat) THEN id
+    WHEN id % 2 = 1 THEN id + 1 
+    ELSE id - 1 END) AS id, student 
+FROM Seat
+ORDER BY id
+
+######################################################################

@@ -39,3 +39,21 @@ WHERE YEAR(mr.created_at) = 2020 AND MONTH(mr.created_at) = 2
 GROUP BY mr.movie_id
 ORDER BY AVG(mr.rating) DESC, m.title
 LIMIT 1)
+
+######################################################################
+1321. Restaurant Growth
+
+SELECT c.visited_on,(
+    SELECT SUM(amount)
+    FROM Customer
+    WHERE visited_on BETWEEN DATE_ADD(c.visited_on, INTERVAL -6 DAY) AND c.visited_on 
+    ) as amount,
+    (
+    SELECT round(SUM(amount)/7,2)
+    FROM Customer
+    WHERE visited_on BETWEEN DATE_ADD(c.visited_on, INTERVAL -6 DAY) AND c.visited_on 
+    ) as average_amount
+FROM Customer as c
+WHERE c.visited_on >= DATE_ADD((SELECT MIN(visited_on) FROM Customer), INTERVAL 6 DAY)
+GROUP BY c.visited_on
+# ORDER BY visited_on ASC

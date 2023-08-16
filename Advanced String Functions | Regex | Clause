@@ -5,3 +5,24 @@ FROM Users
 ORDER BY user_id
 
 ################################################################################
+1527. Patients With a Condition
+
+SELECT patient_id, patient_name, conditions
+FROM Patients
+Where conditions LIKE '% DIAB1%' OR
+Conditions LIKE 'DIAB1%';
+
+################################################################################
+196. Delete Duplicate Emails
+
+DELETE p1
+FROM Person as p1
+INNER JOIN Person as p2
+ON p1.email = p2.email
+WHERE p1.id > p2.id
+
+################################################################################
+176. Second Highest Salary
+
+SELECT max(salary) as SecondHighestSalary FROM Employee
+WHERE salary != (SELECT MAX(salary) FROM Employee)

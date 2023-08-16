@@ -72,3 +72,18 @@ FROM (
 GROUP BY requester_id
 ORDER BY num DESC
 LIMIT 1
+
+###################################################################### HARD QUESTION 
+185. Department Top Three Salaries
+
+WITH ordered AS (
+SELECT d.name as Department, e.name as Employee ,e.salary as Salary,
+DENSE_RANK() OVER(PARTITION BY departmentID ORDER BY salary DESC) as highest_in_dept
+FROM Employee as e 
+LEFT JOIN Department as d
+on e.departmentId = d.id
+)
+
+SELECT Department, Employee, Salary
+FROM Ordered
+WHERE highest_in_dept <= 3

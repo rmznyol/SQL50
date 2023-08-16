@@ -73,6 +73,22 @@ GROUP BY requester_id
 ORDER BY num DESC
 LIMIT 1
 
+######################################################################
+585. Investments in 2016
+
+WITH cte AS 
+(SELECT *,
+ COUNT(*) OVER(PARTITION BY tiv_2015) as cnt
+FROM Insurance)
+
+SELECT ROUND(SUM(cte.tiv_2016),2) as tiv_2016
+FROM cte as cte 
+LEFT JOIN Insurance as i
+ON i.lat = cte.lat and cte.lon = i.lon and cte.pid != i.pid
+WHERE i.pid is null and cnt > 1
+
+
+
 ###################################################################### HARD QUESTION 
 185. Department Top Three Salaries
 

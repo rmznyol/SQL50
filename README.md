@@ -1,2 +1,5 @@
 # SQL50
-Leetcode Solutions for SQL50 Program
+This repository includes my solutions for leetcode SQL problems. 
+So far it follows two leetcode programs
+- SQL50 
+- Advanced SQL50

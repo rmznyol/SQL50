@@ -58,3 +58,15 @@ ON e.right_operand = v2.name
 
 ######################################################################
 1212. Team Scores in Football Tournament
+
+SELECT team_id, team_name, SUM(CASE
+WHEN host_goals > guest_goals AND host_team = team_id THEN 3 
+WHEN host_goals < guest_goals AND guest_team = team_id THEN 3 
+WHEN host_goals = guest_goals THEN 1
+ELSE 0
+END) as num_points
+FROM Teams as t
+LEFT JOIN Matches as m
+ON t.team_id = m.host_team or t.team_id = m.guest_team
+GROUP BY team_id, team_name
+ORDER BY num_points DESC, team_id 

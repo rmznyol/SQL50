@@ -1,5 +1,13 @@
 603. Consecutive Available Seats
 
+SELECT c1.seat_id
+FROM Cinema as c1
+LEFT JOIN Cinema as c2
+ON c1.seat_id + 1 = c2.seat_id
+LEFT JOIN Cinema as c3
+ON c1.seat_id - 1 = c3.seat_id
+WHERE (c1.free = 1 and c2.free = 1)  or (c3.free = 1 and c1.free = 1)
+
 #########################################################
 1795. Rearrange Products Table
 
@@ -69,5 +77,10 @@ GROUP BY a1.player_id, a1.event_date
 #########################################################
 1783. Grand Slam Titles
 
+#########################################################
+1747. Leetflex Banned Accounts
 
-
+SELECT DISTINCT(l1.account_id)
+FROM LogInfo as l1
+INNER JOIN Loginfo as l2
+ON l1.account_id = l2.account_id and l1.ip_address != l2.ip_address and l1.login <= l2.login and l1.logout >= l2.login

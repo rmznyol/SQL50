@@ -25,6 +25,10 @@ WHERE store3 IS NOT NULL
 #########################################################
 613. Shortest Distance in a Line
 
+SELECT MIN(p1.x - p2.x) as shortest 
+FROM Point as p1
+INNER JOIN Point as p2
+ON p1.x > p2.x
 #########################################################
 1965. Employees With Missing Information
 
@@ -74,9 +78,16 @@ FROM Activity as a1
 INNER JOIN Activity as a2
 ON a1.player_id = a2.player_id and a1.event_date >= a2.event_date
 GROUP BY a1.player_id, a1.event_date
-#########################################################
+######################################################### (IMPORTANT SOLUTION)
 1783. Grand Slam Titles
 
+SELECT player_id,player_name,
+SUM(player_id=Wimbledon)+SUM(player_id=Fr_open)+SUM(player_id=US_open)+SUM(player_id=Au_open)
+as grand_slams_count
+FROM Players
+JOIN Championships
+ON player_id=Wimbledon or player_id=Fr_open or player_id=US_open or player_id=Au_open
+GROUP BY player_id
 #########################################################
 1747. Leetflex Banned Accounts
 

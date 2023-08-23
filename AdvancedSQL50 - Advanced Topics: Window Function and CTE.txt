@@ -1,0 +1,12 @@
+WITH cte AS(
+    SELECT student_id,
+    CASE WHEN score = MIN(score) OVER (PARTITION BY exam_id) THEN 1
+    WHEN score = MAX(score) OVER (PARTITION BY exam_id) THEN 1
+    ELSE 0 
+    END as flag
+    FROM Exam
+)
+SELECT student_id, student_name
+FROM Student
+WHERE student_id IN (SELECT student_id FROM cte WHERE flag = 0) 
+AND student_id NOT IN (SELECT student_id FROM cte WHERE flag = 1)

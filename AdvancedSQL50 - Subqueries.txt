@@ -1,3 +1,11 @@
+1350. Students With Invalid Departments
+
+SELECT s.id, s.name
+FROM Students as s
+LEFT JOIN Departments as d
+ON s.department_id = d.id
+WHERE d.id is Null
+
 ################################################################################
 184. Department Highest Salary
 SELECT Department, Employee, Salary

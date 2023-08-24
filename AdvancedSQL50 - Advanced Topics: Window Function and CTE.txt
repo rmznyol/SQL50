@@ -1,5 +1,19 @@
+1077. Project Employees III
+
+SELECT project_id, employee_id
+FROM (
+    SELECT p.project_id, e.employee_id,
+    RANK() OVER(PARTITION BY p.project_id ORDER BY e.experience_years DESC) as rnk
+    FROM Project as p
+    INNER JOIN Employee as e 
+    ON e.employee_id = p.employee_id
+) as t
+WHERE rnk = 1
 ################################################################################
 
+
+
+################################################################################
 1412. Find the Quiet Students in All Exams
 
 WITH cte AS(

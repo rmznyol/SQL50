@@ -5,7 +5,11 @@ FROM Students as s
 LEFT JOIN Departments as d
 ON s.department_id = d.id
 WHERE d.id is Null
+################################################################################
+1303. Find the Team Size
 
+SELECT employee_id, COUNT(*) OVER(PARTITION BY team_id) as team_size
+FROM Employee
 ################################################################################
 184. Department Highest Salary
 SELECT Department, Employee, Salary

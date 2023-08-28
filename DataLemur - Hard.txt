@@ -1,0 +1,16 @@
+########################################################################
+#Y-on-Y Growth Rate [Wayfair SQL Interview Question] (Hard)
+
+WITH cte AS (
+  SELECT product_id, SUM(spend) as year_spend, EXTRACT(YEAR FROM transaction_date) as year
+  FROM user_transactions 
+  GROUP BY  product_id, EXTRACT(YEAR FROM transaction_date))
+
+SELECT c1.year, c1.product_id,c1.year_spend as curr_year_spend, c2.year_spend as prev_year_spend,
+ROUND((c1.year_spend - c2.year_spend)/c2.year_spend * 100,2) as yoy_rate
+FROM cte as c1
+LEFT JOIN cte as c2
+ON c1.product_id = c2.product_id AND c1.year -1 = c2.year
+ORDER BY c1.product_id, c1.year
+
+########################################################################

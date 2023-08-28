@@ -1,0 +1,14 @@
+#Page With No Likes [Facebook SQL Interview Question] (Easy)
+
+SELECT pages.page_id 
+FROM pages
+LEFT JOIN page_likes
+ON pages.page_id = page_likes.page_id
+WHERE page_likes.page_id is NULL;
+
+########################################################################
+#Unfinished Parts [Tesla SQL Interview Question] (Easy)
+
+SELECT part, assembly_step 
+FROM parts_assembly
+WHERE finish_date is NULL;

@@ -12,3 +12,16 @@ WHERE page_likes.page_id is NULL;
 SELECT part, assembly_step 
 FROM parts_assembly
 WHERE finish_date is NULL;
+
+
+########################################################################
+#Histogram of Tweets [Twitter SQL Interview Question] (Easy)
+
+SELECT *, COUNT(*) as users_num
+FROM (
+  SELECT COUNT(tweet_id) as tweet_bucket
+  FROM tweets
+  WHERE EXTRACT(YEAR FROM tweet_date) = 2022
+  GROUP BY user_id
+) as T 
+GROUP BY tweet_bucket

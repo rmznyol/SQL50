@@ -14,3 +14,17 @@ ON c1.product_id = c2.product_id AND c1.year -1 = c2.year
 ORDER BY c1.product_id, c1.year
 
 ########################################################################
+Median Google Search Frequency [Google SQL Interview Question] (Hard)
+
+WITH cte AS (
+  SELECT c1.searches, SUM(c2.num_users) as acc
+  FROM search_frequency as c1
+  INNER JOIN search_frequency as c2
+  ON c1.searches >= c2.searches
+  GROUP BY c1.searches
+)
+
+SELECT ROUND(AVG(searches),1)
+FROM cte
+WHERE acc >= (SELECT SUM(num_users) / 2 FROM search_frequency)
+AND acc <= (SELECT SUM(num_users) / 2 + 1 FROM search_frequency)

@@ -1,3 +1,15 @@
+#Active User Retention [Facebook SQL Interview Question] (Hard)
+
+SELECT 7 as month, COUNT(DISTINCT(u1.user_id))
+FROM user_actions as u1
+INNER JOIN user_actions as u2
+ON u1.user_id = u2.user_id
+WHERE EXTRACT(YEAR FROM u1.event_date) = 2022 AND
+EXTRACT(YEAR FROM u2.event_date) = 2022 AND
+EXTRACT(MONTH FROM u1.event_date) = 6 AND
+EXTRACT(MONTH FROM u2.event_date) = 7;
+
+
 ########################################################################
 #Y-on-Y Growth Rate [Wayfair SQL Interview Question] (Hard)
 

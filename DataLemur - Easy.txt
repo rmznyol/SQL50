@@ -25,3 +25,17 @@ FROM (
   GROUP BY user_id
 ) as T 
 GROUP BY tweet_bucket
+
+########################################################################
+Laptop vs. Mobile Viewership [New York Times SQL Interview Question] (Easy)
+SELECT SUM(
+  CASE device_type 
+  WHEN 'laptop' THEN 1
+  ELSE 0 END) as laptop_views,
+  SUM(CASE device_type 
+  WHEN 'tablet' THEN 1
+  WHEN 'phone' THEN 1
+  ELSE 0 END) as mobile_views
+FROM viewership;
+
+########################################################################

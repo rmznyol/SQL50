@@ -28,4 +28,5 @@ t1.tweet_date >= t2.tweet_date AND
 t2.tweet_date + INTERVAL '2 day' >= t1.tweet_date
 GROUP BY t1.user_id, t1.tweet_date
 ORDER BY t1.user_id, t1.tweet_date;
+
 ###############################################################

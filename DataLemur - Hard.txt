@@ -40,3 +40,22 @@ SELECT ROUND(AVG(searches),1)
 FROM cte
 WHERE acc >= (SELECT SUM(num_users) / 2 FROM search_frequency)
 AND acc <= (SELECT SUM(num_users) / 2 + 1 FROM search_frequency)
+########################################################################
+Advertiser Status [Facebook SQL Interview Question] (Hard)
+
+SELECT CASE 
+  WHEN a.user_id is null THEN d.user_id
+  ELSE a.user_id
+  END
+  AS user_id
+, CASE
+  WHEN paid is null THEN 'CHURN'
+  WHEN a.status is null THEN 'NEW'
+  WHEN status = 'CHURN' THEN 'RESURRECT'
+  ELSE 'EXISTING'
+  END
+  AS new_status
+FROM advertiser as a 
+FULL OUTER JOIN daily_pay as d
+ON a.user_id = d.user_id
+ORDER BY user_id;

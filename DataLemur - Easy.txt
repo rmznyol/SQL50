@@ -39,3 +39,12 @@ SELECT SUM(
 FROM viewership;
 
 ########################################################################
+Average Post Hiatus (Part 1) [Facebook SQL Interview Question] (Easy)
+
+SELECT  user_id,
+EXTRACT(DAY FROM MAX(post_date) - MIN(post_Date)) as days_between
+FROM posts
+WHERE EXTRACT(YEAR FROM post_date) = 2021
+GROUP BY user_id
+HAVING COUNT(*) > 1;
+########################################################################

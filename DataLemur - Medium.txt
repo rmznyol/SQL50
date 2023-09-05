@@ -59,3 +59,22 @@ ON a.artist_id = cte.artist_id
 WHERE cte.artist_rank <= 5
 ORDER BY cte.artist_rank;
 ###############################################################
+Signup Activation Rate [TikTok SQL Interview Question] (Medium)
+
+SELECT ROUND(COUNT(DISTINCT(e.email_id)) ::DECIMAL
+/(SELECT COUNT(DISTINCT(email_id)) FROM emails),2) as confirm_rate
+FROM emails as e
+LEFT JOIN texts as t
+ON e.email_id = t.email_id
+WHERE t.signup_action = 'Confirmed';
+###############################################################
+Supercloud Customer [Microsoft SQL Interview Question] (Medium)
+
+SELECT c.customer_id 
+FROM customer_contracts as c
+INNER JOIN products as p
+ON c.product_id = p.product_id
+GROUP BY c.customer_id
+HAVING COUNT(DISTINCT(p.product_category)) = (
+  SELECT COUNT(DISTINCT(product_category)) FROM products);
+###############################################################

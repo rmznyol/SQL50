@@ -59,3 +59,16 @@ FROM advertiser as a
 FULL OUTER JOIN daily_pay as d
 ON a.user_id = d.user_id
 ORDER BY user_id;
+
+########################################################################
+3-Topping Pizzas [McKinsey SQL Interview Question] (Hard) 
+
+SELECT CONCAT(t1.topping_name,',',t2.topping_name,',', t3.topping_name) as pizza,
+t1.ingredient_cost + t2.ingredient_cost + t3.ingredient_cost as total_cost 
+FROM pizza_toppings as t1
+CROSS JOIN pizza_toppings as t2
+CROSS JOIN pizza_toppings as t3
+WHERE t1.topping_name < t2.topping_name 
+AND t1.topping_name < t3.topping_name
+AND t2.topping_name < t3.topping_name
+ORDER BY total_cost DESC, t1.topping_name, t2.topping_name, t3.topping_name;

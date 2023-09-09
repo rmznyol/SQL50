@@ -78,3 +78,30 @@ GROUP BY c.customer_id
 HAVING COUNT(DISTINCT(p.product_category)) = (
   SELECT COUNT(DISTINCT(product_category)) FROM products);
 ###############################################################
+Odd and Even Measurements [Google SQL Interview Question] (Medium)
+
+SELECT DATE(measurement_time) as measurement_day, 
+SUM(CASE WHEN rank % 2 = 1 THEN measurement_value
+ELSE 0 END) as odd_sum,
+SUM(CASE WHEN rank % 2 = 0 THEN measurement_value
+ELSE 0 END) as even_sum
+
+FROM (
+SELECT *, RANK() OVER(PARTITION BY DATE(measurement_time) ORDER BY measurement_time)
+FROM measurements
+) as t
+GROUP BY DATE(measurement_time)
+ORDER BY DATE(measurement_time);
+###############################################################
+Histogram of Users and Purchases [Walmart SQL Interview Question] (Medium)
+
+SELECT transaction_date, user_id, COUNT(product_id) as purchase_count
+FROM (
+  SELECT transaction_date, user_id,product_id, 
+  MAX(transaction_date) OVER(PARTITION BY user_id)
+  FROM user_transactions
+) as t
+WHERE transaction_date = max
+GROUP BY user_id, transaction_date
+ORDER BY transaction_date;
+###############################################################

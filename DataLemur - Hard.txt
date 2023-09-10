@@ -72,3 +72,12 @@ WHERE t1.topping_name < t2.topping_name
 AND t1.topping_name < t3.topping_name
 AND t2.topping_name < t3.topping_name
 ORDER BY total_cost DESC, t1.topping_name, t2.topping_name, t3.topping_name;
+########################################################################
+Repeated Payments [Stripe SQL Interview Question] (Hard)
+
+SELECT COUNT(*) as payment_count 
+FROM transactions as t1
+INNER JOIN transactions as t2
+ON t1.merchant_id = t2.merchant_id AND t1.credit_card_id = t2.credit_card_id AND t1.amount = t2.amount
+AND t1.transaction_timestamp > t2.transaction_timestamp
+AND t2.transaction_timestamp + INTERVAL '10 minute' >= t1.transaction_timestamp;

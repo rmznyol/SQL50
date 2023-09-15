@@ -105,3 +105,35 @@ WHERE transaction_date = max
 GROUP BY user_id, transaction_date
 ORDER BY transaction_date;
 ###############################################################
+Compressed Mode [Alibaba SQL Interview Question] (Medium)
+
+SELECT item_count as mode 
+FROM items_per_order
+WHERE order_occurrences = (SELECT MAX(order_occurrences) 
+FROM items_per_order)
+ORDER BY item_count;
+
+###############################################################
+Card Launch Success [JPMorgan Chase SQL Interview Question] (Medium)
+
+WITH cte as (
+SELECT *, RANK() OVER(PARTITION BY card_name ORDER BY issue_year, issue_month) 
+FROM monthly_cards_issued
+)
+SELECT card_name, issued_amount
+FROM cte
+WHERE rank = 1
+ORDER BY issued_amount DESC;
+
+###############################################################
+International Call Percentage [Verizon SQL Interview Question] (Medium)
+
+SELECT ROUND(COUNT(*)/
+(SELECT COUNT(*) FROM phone_calls)::DECIMAL *100,1) as international_calls_pct
+FROM phone_calls as c 
+INNER JOIN phone_info as ic 
+on c.caller_id = ic.caller_id
+INNER JOIN phone_info as ir
+ON c.receiver_id = ir.caller_id
+WHERE ic.country_id != ir.country_id 
+AND ic.caller_id != ir.caller_id;

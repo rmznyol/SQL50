@@ -60,6 +60,7 @@ LIMIT 2;
 
 ########################################################################
 Cities With Completed Trades [Robinhood SQL Interview Question] (Easy)
+
 SELECT u.city, COUNT(*) as total_orders
 FROM trades as t
 INNER JOIN users as u
@@ -68,3 +69,11 @@ WHERE t.status = 'Completed'
 GROUP BY u.city
 ORDER BY total_orders DESC
 LIMIT 3;
+########################################################################
+Average Review Ratings [Amazon SQL Interview Question] (Easy)
+
+SELECT EXTRACT(MONTH FROM submit_date), product_id as product, ROUNd(AVG(stars),2) as avg_stars
+FROM reviews
+GROUP BY product_id, EXTRACT(YEAR FROM submit_date), EXTRACT(MONTH FROM submit_date)
+ORDER BY EXTRACT(YEAR FROM submit_date), EXTRACT(MONTH FROM submit_date), product_id;
+########################################################################

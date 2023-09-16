@@ -57,3 +57,14 @@ EXTRACT(YEAR FROM sent_date) = 2022
 GROUP BY sender_id
 ORDER BY message_count DESC
 LIMIT 2;
+
+########################################################################
+Cities With Completed Trades [Robinhood SQL Interview Question] (Easy)
+SELECT u.city, COUNT(*) as total_orders
+FROM trades as t
+INNER JOIN users as u
+ON t.user_id = u.user_id
+WHERE t.status = 'Completed'
+GROUP BY u.city
+ORDER BY total_orders DESC
+LIMIT 3;

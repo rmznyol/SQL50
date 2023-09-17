@@ -85,3 +85,12 @@ SELECT app_id, ROUND(100.0 *
 FROM events
 WHERE EXTRACT(YEAR FROM timestamp) = 2022
 GROUP BY app_id;
+########################################################################
+Second Day Confirmation [TikTok SQL Interview Question] (Easy)
+
+SELECT DISTINCT user_id 
+FROM emails as e 
+INNER JOIN texts as t
+ON e.email_id = t.email_id
+WHERE t.signup_action = 'Confirmed'
+AND e.signup_date + INTERVAL '1 day' =  t.action_date;

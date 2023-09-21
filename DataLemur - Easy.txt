@@ -94,3 +94,12 @@ INNER JOIN texts as t
 ON e.email_id = t.email_id
 WHERE t.signup_action = 'Confirmed'
 AND e.signup_date + INTERVAL '1 day' =  t.action_date;
+########################################################################
+Cards Issued Difference [JPMorgan Chase SQL Interview Question] (Easy)
+
+SELECT card_name, MAX(issued_amount) - MIN(issued_amount) as difference
+FROM monthly_cards_issued
+GROUP BY card_name
+ORDER BY difference DESC;
+
+########################################################################

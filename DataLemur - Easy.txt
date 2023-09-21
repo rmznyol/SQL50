@@ -123,3 +123,9 @@ WHERE total_sales - cogs < 0
 GROUP BY manufacturer
 ORDER BY total_loss DESC;
 ########################################################################
+Pharmacy Analytics (Part 3) [CVS Health SQL Interview Question] (Easy)
+
+SELECT manufacturer, CONCAT('$',ROUND(SUM(total_sales) / 1000000)::VARCHAR, ' million') as sale
+FROM pharmacy_sales
+GROUP BY manufacturer
+ORDER BY ROUND(SUM(total_sales) / 1000000) DESC, manufacturer DESC;

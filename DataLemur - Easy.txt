@@ -114,3 +114,12 @@ SELECT drug, total_sales - cogs as total_profit
 FROM pharmacy_sales
 ORDER BY total_profit DESC
 LIMIT 3 ;
+########################################################################
+Pharmacy Analytics (Part 2) [CVS Health SQL Interview Question]
+
+SELECT manufacturer, COUNT(drug) as drug_count, SUM(cogs- total_sales) as total_loss
+FROM pharmacy_sales
+WHERE total_sales - cogs < 0
+GROUP BY manufacturer
+ORDER BY total_loss DESC;
+########################################################################

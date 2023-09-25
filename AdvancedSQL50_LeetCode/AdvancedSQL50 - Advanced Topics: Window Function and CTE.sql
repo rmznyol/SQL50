@@ -10,7 +10,7 @@ FROM (
 ) as t
 WHERE rnk = 1
 ################################################################################
-1285. Find the Start and End Number of Continuous Ranges
+-- 1285. Find the Start and End Number of Continuous Ranges
 
  WITH cte as (
   SELECT *, ROW_NUMBER() OVER( ORDER BY log_id) as rnk
@@ -21,7 +21,7 @@ WHERE rnk = 1
  GROUP BY log_id - rnk
 
 ################################################################################
-1596. The Most Frequently Ordered Products for Each Customer
+-- 1596. The Most Frequently Ordered Products for Each Customer
 
 WITH cte1 as (
   SELECT o.customer_id, o.product_id, p.product_name,
@@ -40,7 +40,7 @@ FROM cte2
 WHERE cnt = mx
 GROUP BY customer_id, product_id, product_name
 ################################################################################
-1709. Biggest Window Between Visits
+-- 1709. Biggest Window Between Visits
 
 WITH cte AS (
   SELECT v1.user_id, v1.visit_date as initial,
@@ -54,7 +54,7 @@ SELECT user_id, MAX(diff) as biggest_window
 FROM cte
 GROUP BY user_id
 ################################################################################
-1270. All People Report to the Given Manager
+-- 1270. All People Report to the Given Manager
 
 WITH cte as (
   SELECT * 
@@ -69,7 +69,7 @@ LEFT JOIN cte as e3
 ON e2.manager_id = e3.employee_id
 WHERE (e1.manager_id = 1) or (e2.manager_id = 1) or (e3.manager_id = 1) 
 ################################################################################
-1412. Find the Quiet Students in All Exams
+-- 1412. Find the Quiet Students in All Exams
 
 WITH cte AS(
     SELECT student_id,
@@ -84,7 +84,7 @@ FROM Student
 WHERE student_id IN (SELECT student_id FROM cte WHERE flag = 0) 
 AND student_id NOT IN (SELECT student_id FROM cte WHERE flag = 1)
 ################################################################################ RECURSION !!!
-1767. Find the Subtasks That Did Not Execute
+-- 1767. Find the Subtasks That Did Not Execute
 
 WITH RECURSIVE cte as (
   SELECT task_id, subtasks_count as subtask_id
@@ -99,7 +99,7 @@ FROM cte
 WHERE (task_id, subtask_id) NOT IN (
   SELECT * FROM Executed as e WHERE e.task_id = cte.task_id)
 ################################################################################ val1-val2 gives errors with 0 
-1225. Report Contiguous Dates
+-- 1225. Report Contiguous Dates
 
 WITH f as (
   SELECT *, (1 + ROW_NUMBER() OVER( ORDER BY fail_date)) as rnk

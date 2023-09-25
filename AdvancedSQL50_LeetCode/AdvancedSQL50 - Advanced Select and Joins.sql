@@ -1,4 +1,4 @@
-603. Consecutive Available Seats
+-- 603. Consecutive Available Seats
 
 SELECT c1.seat_id
 FROM Cinema as c1

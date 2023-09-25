@@ -4,3 +4,4 @@ So far it follows two leetcode programs and (free) DataLemur problems
 - SQL50 (Completed)
 - Advanced SQL50 (Completed)
 - DataLemur (Completed)
+- HackerRank (In Progress)

@@ -1,4 +1,4 @@
-1077. Project Employees III
+-- 1077. Project Employees III
 
 SELECT project_id, employee_id
 FROM (
@@ -9,7 +9,7 @@ FROM (
     ON e.employee_id = p.employee_id
 ) as t
 WHERE rnk = 1
-################################################################################
+
 -- 1285. Find the Start and End Number of Continuous Ranges
 
  WITH cte as (
@@ -20,7 +20,7 @@ WHERE rnk = 1
  FROM cte
  GROUP BY log_id - rnk
 
-################################################################################
+
 -- 1596. The Most Frequently Ordered Products for Each Customer
 
 WITH cte1 as (
@@ -39,7 +39,7 @@ SELECT customer_id, product_id, product_name
 FROM cte2
 WHERE cnt = mx
 GROUP BY customer_id, product_id, product_name
-################################################################################
+
 -- 1709. Biggest Window Between Visits
 
 WITH cte AS (
@@ -53,7 +53,7 @@ WITH cte AS (
 SELECT user_id, MAX(diff) as biggest_window
 FROM cte
 GROUP BY user_id
-################################################################################
+
 -- 1270. All People Report to the Given Manager
 
 WITH cte as (
@@ -68,7 +68,7 @@ ON e1.manager_id = e2.employee_id
 LEFT JOIN cte as e3
 ON e2.manager_id = e3.employee_id
 WHERE (e1.manager_id = 1) or (e2.manager_id = 1) or (e3.manager_id = 1) 
-################################################################################
+
 -- 1412. Find the Quiet Students in All Exams
 
 WITH cte AS(
@@ -83,7 +83,8 @@ SELECT student_id, student_name
 FROM Student
 WHERE student_id IN (SELECT student_id FROM cte WHERE flag = 0) 
 AND student_id NOT IN (SELECT student_id FROM cte WHERE flag = 1)
-################################################################################ RECURSION !!!
+
+-- RECURSION !!!
 -- 1767. Find the Subtasks That Did Not Execute
 
 WITH RECURSIVE cte as (
@@ -98,7 +99,7 @@ SELECT *
 FROM cte
 WHERE (task_id, subtask_id) NOT IN (
   SELECT * FROM Executed as e WHERE e.task_id = cte.task_id)
-################################################################################ val1-val2 gives errors with 0 
+-- val1-val2 gives errors with 0 
 -- 1225. Report Contiguous Dates
 
 WITH f as (

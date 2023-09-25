@@ -4,7 +4,7 @@ SELECT Person.firstName, Person.lastName, Address.city, Address.state FROM Perso
 LEFT JOIN Address
 ON Person.personId = Address.personID;
 
-######################################################################
+
 -- 1607. Sellers With No Sales
 
 WITH cte as (
@@ -19,7 +19,7 @@ ON s.seller_id = o.seller_id
 WHERE o.seller_id is NULL
 ORDER BY seller_name;
 
-######################################################################
+
 -- 1407. Top Travellers
 
 SELECT u.name, SUM(IFNULL(r.distance, 0)) AS travelled_distance 
@@ -29,7 +29,7 @@ ON u.id = r.user_id
 GROUP BY u.name, u.id
 ORDER BY travelled_distance DESC, u.name ASC;
 
-######################################################################
+
 -- 607. Sales Person
 
 SELECT name from SalesPerson 
@@ -40,7 +40,7 @@ FROM SalesPerson
   LEFT JOIN Company
   ON Orders.com_id = Company.com_id
 WHERE Company.name = 'REd');
-######################################################################
+
 -- 1440. Evaluate Boolean Expression
 
 SELECT e.left_operand, e.operator, e.right_operand,
@@ -54,7 +54,7 @@ INNER JOIN Variables as v1
 ON e.left_operand = v1.name
 INNER JOIN Variables as v2
 ON e.right_operand = v2.name;
-######################################################################
+
 -- 1212. Team Scores in Football Tournament
 
 SELECT team_id, team_name, SUM(CASE

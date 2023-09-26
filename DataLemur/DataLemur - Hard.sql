@@ -1,4 +1,4 @@
-#Active User Retention [Facebook SQL Interview Question] (Hard)
+-- Active User Retention [Facebook SQL Interview Question] (Hard)
 
 SELECT 7 as month, COUNT(DISTINCT(u1.user_id))
 FROM user_actions as u1
@@ -9,9 +9,7 @@ EXTRACT(YEAR FROM u2.event_date) = 2022 AND
 EXTRACT(MONTH FROM u1.event_date) = 6 AND
 EXTRACT(MONTH FROM u2.event_date) = 7;
 
-
-########################################################################
-#Y-on-Y Growth Rate [Wayfair SQL Interview Question] (Hard)
+-- Y-on-Y Growth Rate [Wayfair SQL Interview Question] (Hard)
 
 WITH cte AS (
   SELECT product_id, SUM(spend) as year_spend, EXTRACT(YEAR FROM transaction_date) as year
@@ -25,8 +23,7 @@ LEFT JOIN cte as c2
 ON c1.product_id = c2.product_id AND c1.year -1 = c2.year
 ORDER BY c1.product_id, c1.year
 
-########################################################################
-Median Google Search Frequency [Google SQL Interview Question] (Hard)
+-- Median Google Search Frequency [Google SQL Interview Question] (Hard)
 
 WITH cte AS (
   SELECT c1.searches, SUM(c2.num_users) as acc
@@ -40,8 +37,8 @@ SELECT ROUND(AVG(searches),1)
 FROM cte
 WHERE acc >= (SELECT SUM(num_users) / 2 FROM search_frequency)
 AND acc <= (SELECT SUM(num_users) / 2 + 1 FROM search_frequency)
-########################################################################
-Advertiser Status [Facebook SQL Interview Question] (Hard)
+
+-- Advertiser Status [Facebook SQL Interview Question] (Hard)
 
 SELECT CASE 
   WHEN a.user_id is null THEN d.user_id
@@ -60,8 +57,7 @@ FULL OUTER JOIN daily_pay as d
 ON a.user_id = d.user_id
 ORDER BY user_id;
 
-########################################################################
-3-Topping Pizzas [McKinsey SQL Interview Question] (Hard) 
+-- 3-Topping Pizzas [McKinsey SQL Interview Question] (Hard) 
 
 SELECT CONCAT(t1.topping_name,',',t2.topping_name,',', t3.topping_name) as pizza,
 t1.ingredient_cost + t2.ingredient_cost + t3.ingredient_cost as total_cost 
@@ -72,8 +68,8 @@ WHERE t1.topping_name < t2.topping_name
 AND t1.topping_name < t3.topping_name
 AND t2.topping_name < t3.topping_name
 ORDER BY total_cost DESC, t1.topping_name, t2.topping_name, t3.topping_name;
-########################################################################
-Repeated Payments [Stripe SQL Interview Question] (Hard)
+
+-- Repeated Payments [Stripe SQL Interview Question] (Hard)
 
 SELECT COUNT(*) as payment_count 
 FROM transactions as t1

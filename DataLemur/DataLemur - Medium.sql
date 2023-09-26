@@ -1,12 +1,11 @@
-# User's Third Transaction [Uber SQL Interview Question] (Medium)
+-- User's Third Transaction [Uber SQL Interview Question] (Medium)
 SELECT user_id, spend, transaction_date
 FROM
   (SELECT *, RANK() OVER(PARTITION BY user_id ORDER BY transaction_date)
   FROM transactions) as t 
 WHERE rank = 3
 
-###############################################################
-# Sending vs. Opening Snaps [Snapchat SQL Interview Question] (Medium)
+-- Sending vs. Opening Snaps [Snapchat SQL Interview Question] (Medium)
 
 SELECT age_bucket,
 ROUND((SUM(time_spent) FILTER (WHERE activity_type = 'send')) / SUM(time_spent) * 100.0, 2) as send_perc,
@@ -17,8 +16,8 @@ INNER JOIN age_breakdown b
 ON a.user_id = b.user_id
 WHERE a.activity_type != 'chat'
 GROUP BY b.age_bucket;
-###############################################################
-# Tweets' Rolling Averages [Twitter SQL Interview Question] (Medium)
+
+-- Tweets' Rolling Averages [Twitter SQL Interview Question] (Medium)
 
 SELECT t1.user_id, t1.tweet_date, ROUND(AVG(t2.tweet_count),2) as rolling_avg_3d
 FROM tweets as t1
@@ -29,8 +28,7 @@ t2.tweet_date + INTERVAL '2 day' >= t1.tweet_date
 GROUP BY t1.user_id, t1.tweet_date
 ORDER BY t1.user_id, t1.tweet_date;
 
-###############################################################
-# Highest-Grossing Items [Amazon SQL Interview Question] (Medium)
+-- Highest-Grossing Items [Amazon SQL Interview Question] (Medium)
 
 SELECT category, product, total_spend
 FROM ( 
@@ -41,8 +39,7 @@ FROM (
   ) as t
 WHERE rank <= 2;
 
-###############################################################
-Top 5 Artists [Spotify SQL Interview Question] (Medium)
+-- Top 5 Artists [Spotify SQL Interview Question] (Medium)
 
 WITH CTE as (
   SELECT s.artist_id, DENSE_RANK() OVER(ORDER BY COUNT(g.song_id) DESC) as artist_rank
@@ -58,8 +55,8 @@ INNER JOIN cte
 ON a.artist_id = cte.artist_id
 WHERE cte.artist_rank <= 5
 ORDER BY cte.artist_rank;
-###############################################################
-Signup Activation Rate [TikTok SQL Interview Question] (Medium)
+
+-- Signup Activation Rate [TikTok SQL Interview Question] (Medium)
 
 SELECT ROUND(COUNT(DISTINCT(e.email_id)) ::DECIMAL
 /(SELECT COUNT(DISTINCT(email_id)) FROM emails),2) as confirm_rate
@@ -67,8 +64,8 @@ FROM emails as e
 LEFT JOIN texts as t
 ON e.email_id = t.email_id
 WHERE t.signup_action = 'Confirmed';
-###############################################################
-Supercloud Customer [Microsoft SQL Interview Question] (Medium)
+
+-- Supercloud Customer [Microsoft SQL Interview Question] (Medium)
 
 SELECT c.customer_id 
 FROM customer_contracts as c
@@ -77,8 +74,8 @@ ON c.product_id = p.product_id
 GROUP BY c.customer_id
 HAVING COUNT(DISTINCT(p.product_category)) = (
   SELECT COUNT(DISTINCT(product_category)) FROM products);
-###############################################################
-Odd and Even Measurements [Google SQL Interview Question] (Medium)
+
+-- Odd and Even Measurements [Google SQL Interview Question] (Medium)
 
 SELECT DATE(measurement_time) as measurement_day, 
 SUM(CASE WHEN rank % 2 = 1 THEN measurement_value
@@ -92,8 +89,8 @@ FROM measurements
 ) as t
 GROUP BY DATE(measurement_time)
 ORDER BY DATE(measurement_time);
-###############################################################
-Histogram of Users and Purchases [Walmart SQL Interview Question] (Medium)
+
+-- Histogram of Users and Purchases [Walmart SQL Interview Question] (Medium)
 
 SELECT transaction_date, user_id, COUNT(product_id) as purchase_count
 FROM (
@@ -104,8 +101,8 @@ FROM (
 WHERE transaction_date = max
 GROUP BY user_id, transaction_date
 ORDER BY transaction_date;
-###############################################################
-Compressed Mode [Alibaba SQL Interview Question] (Medium)
+
+-- Compressed Mode [Alibaba SQL Interview Question] (Medium)
 
 SELECT item_count as mode 
 FROM items_per_order
@@ -113,8 +110,7 @@ WHERE order_occurrences = (SELECT MAX(order_occurrences)
 FROM items_per_order)
 ORDER BY item_count;
 
-###############################################################
-Card Launch Success [JPMorgan Chase SQL Interview Question] (Medium)
+-- Card Launch Success [JPMorgan Chase SQL Interview Question] (Medium)
 
 WITH cte as (
 SELECT *, RANK() OVER(PARTITION BY card_name ORDER BY issue_year, issue_month) 
@@ -125,8 +121,7 @@ FROM cte
 WHERE rank = 1
 ORDER BY issued_amount DESC;
 
-###############################################################
-International Call Percentage [Verizon SQL Interview Question] (Medium)
+-- International Call Percentage [Verizon SQL Interview Question] (Medium)
 
 SELECT ROUND(COUNT(*)/
 (SELECT COUNT(*) FROM phone_calls)::DECIMAL *100,1) as international_calls_pct

@@ -1,4 +1,4 @@
-1978. Employees Whose Manager Left the Company
+-- 1978. Employees Whose Manager Left the Company
 
 SELECT employee_id
 FROM Employees
@@ -6,20 +6,18 @@ WHERE salary < 30000 and manager_id NOT IN (
     SELECT employee_id
     FROM Employees
 )
-ORDER BY employee_id
+ORDER BY employee_id;
 
-######################################################################
-626. Exchange Seats
+-- 626. Exchange Seats
 
 SELECT (CASE 
     WHEN id = (SELECT CASE WHEN MAX(id) % 2 = 1 THEN MAX(id) ELSE null END FROM Seat) THEN id
     WHEN id % 2 = 1 THEN id + 1 
     ELSE id - 1 END) AS id, student 
 FROM Seat
-ORDER BY id
+ORDER BY id;
 
-######################################################################
-1341. Movie Rating
+-- 1341. Movie Rating
 
 (SELECT name as results
 FROM MovieRating as mr
@@ -38,10 +36,9 @@ ON mr.movie_id = m.movie_id
 WHERE YEAR(mr.created_at) = 2020 AND MONTH(mr.created_at) = 2
 GROUP BY mr.movie_id
 ORDER BY AVG(mr.rating) DESC, m.title
-LIMIT 1)
+LIMIT 1);
 
-######################################################################
-1321. Restaurant Growth
+-- 1321. Restaurant Growth
 
 SELECT c.visited_on,(
     SELECT SUM(amount)
@@ -55,11 +52,10 @@ SELECT c.visited_on,(
     ) as average_amount
 FROM Customer as c
 WHERE c.visited_on >= DATE_ADD((SELECT MIN(visited_on) FROM Customer), INTERVAL 6 DAY)
-GROUP BY c.visited_on
-# ORDER BY visited_on ASC
+GROUP BY c.visited_on;
+-- ORDER BY visited_on ASC;
 
-######################################################################
-602. Friend Requests II: Who Has the Most Friends
+-- 602. Friend Requests II: Who Has the Most Friends
 
 SELECT requester_id as id, COUNT(*) as num
 FROM (
@@ -71,10 +67,9 @@ FROM (
   ) as t 
 GROUP BY requester_id
 ORDER BY num DESC
-LIMIT 1
+LIMIT 1;
 
-######################################################################
-585. Investments in 2016
+-- 585. Investments in 2016
 
 WITH cte AS 
 (SELECT *,
@@ -85,12 +80,12 @@ SELECT ROUND(SUM(cte.tiv_2016),2) as tiv_2016
 FROM cte as cte 
 LEFT JOIN Insurance as i
 ON i.lat = cte.lat and cte.lon = i.lon and cte.pid != i.pid
-WHERE i.pid is null and cnt > 1
+WHERE i.pid is null and cnt > 1;
 
 
 
-###################################################################### HARD QUESTION 
-185. Department Top Three Salaries
+-- HARD QUESTION 
+-- 185. Department Top Three Salaries
 
 WITH ordered AS (
 SELECT d.name as Department, e.name as Employee ,e.salary as Salary,
@@ -102,4 +97,4 @@ on e.departmentId = d.id
 
 SELECT Department, Employee, Salary
 FROM Ordered
-WHERE highest_in_dept <= 3
+WHERE highest_in_dept <= 3;

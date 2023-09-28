@@ -27,3 +27,12 @@ WHERE COUNTRYCODE = 'JPN'
 -- Weather Observation Station 1
 SELECT CITY, STATE
 FROM STATION
+
+-- Weather Observation Station 3
+SELECT DISTINCT CITY
+FROM STATION
+WHERE ID % 2 = 0
+
+-- Weather Observation Station 4
+SELECT COUNT(CITY) - COUNT(DISTINCT CITY)
+FROM STATION

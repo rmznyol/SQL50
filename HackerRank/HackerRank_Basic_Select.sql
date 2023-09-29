@@ -57,3 +57,31 @@ WHERE LEFT(CITY,1) in ('a','e','i','o','u')
 SELECT DISTINCT CITY
 FROM STATION
 WHERE RIGHT(CITY,1) in ('a','e','i','o','u')
+
+-- Weather Observation Station 8
+SELECT DISTINCT CITY
+FROM STATION
+WHERE LEFT(CITY,1) in ('a','e','i','o','u') 
+AND RIGHT(CITY,1) in ('a','e','i','o','u')
+
+-- Weather Observation Station 9
+SELECT DISTINCT CITY
+FROM STATION
+WHERE LEFT(CITY,1) NOT IN ('a','e','i','o','u')
+
+-- Weather Observation Station 10
+SELECT DISTINCT CITY
+FROM STATION
+WHERE RIGHT(CITY,1) NOT IN ('a','e','i','o','u')
+
+-- Weather Observation Station 11
+SELECT DISTINCT CITY
+FROM STATION
+WHERE LEFT(CITY,1) NOT in ('a','e','i','o','u') 
+OR RIGHT(CITY,1) NOT in ('a','e','i','o','u')
+
+-- Weather Observation Station 12
+SELECT DISTINCT CITY
+FROM STATION
+WHERE LEFT(CITY,1) NOT in ('a','e','i','o','u') 
+AND RIGHT(CITY,1) NOT in ('a','e','i','o','u')

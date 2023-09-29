@@ -36,3 +36,24 @@ WHERE ID % 2 = 0
 -- Weather Observation Station 4
 SELECT COUNT(CITY) - COUNT(DISTINCT CITY)
 FROM STATION
+
+-- Weather Observation Station 5
+(SELECT CITY, LENGTH(CITY) as len
+FROM STATION
+ORDER BY len DESC, CITY ASC
+LIMIT 1)
+UNION 
+(SELECT CITY, LENGTH(CITY) as len
+FROM STATION
+ORDER BY len ASC, CITY ASC
+LIMIT 1)
+
+-- Weather Observation Station 6
+SELECT CITY
+FROM STATION
+WHERE LEFT(CITY,1) in ('a','e','i','o','u')
+
+-- Weather Observation Station 7
+SELECT DISTINCT CITY
+FROM STATION
+WHERE RIGHT(CITY,1) in ('a','e','i','o','u')

@@ -91,3 +91,15 @@ SELECT NAME
 FROM STUDENTS
 WHERE MARKS > 75
 ORDER BY RIGHT(NAME,3), ID
+
+-- Employee Names
+SELECT name
+FROM Employee
+ORDER BY name
+
+-- Employee Salaries
+SELECT name
+FROM Employee
+WHERE salary > 2000
+AND MONTHS < 10
+ORDER BY employee_id 

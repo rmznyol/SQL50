@@ -18,3 +18,12 @@ GROUP BY Occupation
 ORDER BY COUNT(Occupation), Occupation;
 
 -- Occupations
+SELECT MIN(CASE Occupation WHEN 'Doctor' THEN name END) as Doctor,
+MIN(CASE Occupation WHEN 'Professor' THEN name END) as Professor,
+MIN(CASE Occupation WHEN 'Singer' THEN name END) as Singer,
+MIN(CASE Occupation WHEN 'Actor' THEN name END) as  Actor 
+FROM (SELECT  Name, Occupation, ROW_NUMBER() OVER 
+     (PARTITION BY Occupation ORDER BY Name) 
+      AS rnk
+      FROM OCCUPATIONS) AS T
+GROUP BY rnk;

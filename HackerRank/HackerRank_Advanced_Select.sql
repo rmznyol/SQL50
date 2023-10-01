@@ -27,3 +27,12 @@ FROM (SELECT  Name, Occupation, ROW_NUMBER() OVER
       AS rnk
       FROM OCCUPATIONS) AS T
 GROUP BY rnk;
+
+-- Binary Tree Nodes
+SELECT DISTINCT b1.N, CASE WHEN b2.P is NULL THEN 'Leaf'
+WHEN  b1.P is NULL THEN 'Root'
+ELSE 'Inner' END
+FROM BST as b1
+LEFT JOIN BST as b2
+ON b1.N = b2.P
+ORDER BY b1.N

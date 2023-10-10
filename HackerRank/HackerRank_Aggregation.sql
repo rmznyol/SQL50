@@ -36,3 +36,9 @@ FROM employee
 WHERE salary*months = (
 SELECT MAX(salary*months)
 From employee);
+
+-- Weather Observation Station 13
+
+SELECT ROUND(SUM(LAT_N),4)
+FROM STATION
+WHERE 38.7880 < LAT_N AND LAT_N < 137.2345;

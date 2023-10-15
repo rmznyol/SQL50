@@ -11,3 +11,10 @@ FROM CITY
 INNER JOIN COUNTRY
 ON CITY.CountryCode = COUNTRY.code
 WHERE COUNTRY.CONTINENT = 'Africa';
+
+-- Average Population of Each Continent
+SELECT COUNTRY.Continent, FLOOR(AVG(CITY.Population))
+FROM CITY 
+INNER JOIN COUNTRY
+ON CITY.CountryCode = COUNTRY.Code
+GROUP BY COUNTRY.Continent; 

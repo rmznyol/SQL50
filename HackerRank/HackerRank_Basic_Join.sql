@@ -39,3 +39,15 @@ WHERE s.score = d.score
 GROUP BY s.hacker_id, h.name
 HAVING COUNT(DISTINCT(s.challenge_id)) > 1
 ORDER BY COUNT(DISTINCT(s.challenge_id)) DESC, s.hacker_id;
+
+-- Ollivander's Inventory
+WITH cte AS (
+SELECT w.id, wp.age,w.coins_needed, w.power, MIN(w.coins_needed) OVER(PARTITION BY wp.age, w.power) as min_coin
+FROM WANDS as w
+INNER JOIN Wands_Property as wp
+ON w.code = wp.code AND wp.is_evil = 0
+)
+SELECT id, age, coins_needed, power
+FROM cte
+WHERE coins_needed = min_coin
+ORDER BY power DESC, age DESC;

@@ -51,3 +51,21 @@ SELECT id, age, coins_needed, power
 FROM cte
 WHERE coins_needed = min_coin
 ORDER BY power DESC, age DESC;
+
+
+-- Challenges
+WITH cte as
+    (SELECT DISTINCT hacker_id,
+    COUNT(hacker_id) OVER(PARTITION BY hacker_id) as cnt
+    FROM Challenges)
+,cte2 as
+    (SELECT hacker_id, cnt, 
+     COUNT(cnt) OVER(PARTITION BY cnt) as count_of_cnt 
+     FROM cte)
+
+SELECT h.hacker_id, h.name, cnt 
+FROM cte2
+INNER JOIN Hackers as h 
+ON h.hacker_id = cte2.hacker_id
+AND (count_of_cnt = 1 OR cnt = (SELECT MAX(cnt) from cte2))
+ORDER BY cnt DESC, h.hacker_id;

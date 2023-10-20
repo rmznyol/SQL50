@@ -69,3 +69,18 @@ INNER JOIN Hackers as h
 ON h.hacker_id = cte2.hacker_id
 AND (count_of_cnt = 1 OR cnt = (SELECT MAX(cnt) from cte2))
 ORDER BY cnt DESC, h.hacker_id;
+
+
+-- Contest Leaderboard
+SELECT h.hacker_id, h.name, SUM(t.max_score) as total_score
+FROM 
+    (
+    SELECT hacker_id, challenge_id, max(score) as max_score
+    FROM Submissions
+    GROUP BY hacker_id, challenge_id
+    ) as t
+INNER JOIN Hackers as h
+ON t.hacker_id = h.hacker_id
+GROUP BY h.hacker_id, h.name
+HAVING total_score > 0
+ORDER BY SUM(t.max_score) DESC, h.hacker_id;

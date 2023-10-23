@@ -24,3 +24,16 @@ INNER JOIN packages as pr
 ON f.Friend_ID = pr.id
 WHERE pr.salary > pl.salary
 ORDER BY pr.salary;
+
+-- Symmetric Pairs
+
+WITH cte AS (
+    SELECT X,Y, ROW_NUMBER() OVER() as r
+    FROM Functions
+)
+SELECT DISTINCT f1.x, f1.y
+FROM cte as f1
+INNER JOIN cte as f2
+ON f1.x = f2.y  AND f1.y = f2.x AND f1.r != f2.r
+WHERE f1.x <= f1.y
+ORDER BY f1.x;

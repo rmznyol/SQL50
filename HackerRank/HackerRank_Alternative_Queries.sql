@@ -14,3 +14,14 @@ ORDER BY cnt DESC;
 -- Limiting the recursion on length of the string
 -- prompts an error: 'ERROR 1406 (22001): Data too long for column 'str' at row 1'
 -- See documentation for help: https://dev.mysql.com/doc/refman/8.0/en/with.html
+
+-- Draw The Triangle 2
+WITH RECURSIVE cte AS (
+    SELECT 1 as n, CAST('*' AS CHAR(50)) as print
+    UNION ALL
+    SELECT n + 1, CONCAT(print, ' *')
+    FROM cte
+    WHERE n < 20
+)
+SELECT print
+FROM cte;
